@@ -1,4 +1,5 @@
 <?php
+    
     $title = 'GET Input';
 
     include('./inc/header.php');
@@ -7,10 +8,11 @@
 
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $email = filter_input(INPUT_POST, 'email',FILTER_VALIDATE_EMAIL);
-    }
 
-    if($email == false){
-        $status = 'Please Enter Valid Email Address.';
+        if($email == false){
+            $status = 'Please Enter Valid Email Address.';
+        }
+
     }
 ?>
 
