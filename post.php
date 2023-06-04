@@ -1,16 +1,31 @@
 <?php
-    
+    session_start();
     $title = 'GET Input';
 
     include('./inc/header.php');
+    include('./inc/constants.php');
     require('./inc/functions.php');
+    
     // require_once('./inc/functions.php');
+
+    if(is_user_authenticated()){
+        redirect('admin.php');
+        die();
+    }
 
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $email = filter_input(INPUT_POST, 'email',FILTER_VALIDATE_EMAIL);
-
+        $password = $_POST['password'];
+        redirect('admin.php');
+        die();
         if($email == false){
             $status = 'Please Enter Valid Email Address.';
+        }
+
+        if(authenticate_user($email, $password)){
+            $_SESSION['email'] = $email;
+        }else{
+            $status = 'Please Provide Correct Credentials';
         }
 
     }
